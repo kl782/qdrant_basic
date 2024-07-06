@@ -86,5 +86,5 @@ hits = client.search(
 
 # Display search results
 for hit in hits:
-    print(f"What you're looking for can be found in {hit.payload['doc']}, on page {hit.payload['page']}.")
+    print(f"What you're looking for can be found in {hit.payload['doc']}, on {hit.payload['page']}.")
     print(f"Here's what was relevant: {hit.payload['text']}.")  # Prints the text of the page that matches the query
