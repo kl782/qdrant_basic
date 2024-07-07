@@ -88,11 +88,12 @@ hits = client.search(
 
 # Display search results
 for hit in hits:
+    
+    print(f"What you're looking for can be found in {hit.payload['doc']}, on {hit.payload['page']}.")
     summary = ollama.chat(model='llama3', messages=[
     {
         'role':'user',
         'content':f'In one sentence, summarize the CONTENT of the following vector search result in relation to the original query, {your_query_here}. ##SEARCH RESULT:## {hit.payload['text']} ',
         },
     ])
-    print(f"What you're looking for can be found in {hit.payload['doc']}, on {hit.payload['page']}.")
     print(f"Here's a summary of the source: {summary['message']['content']}")  
