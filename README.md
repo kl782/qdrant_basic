@@ -6,11 +6,10 @@ If you've got local files you want to search through more intelligently, Qdrant 
 1) Create a folder in Documents, titled "qdrant". (Alternatively, edit the file path in the code before running it).
 2) Drag and drop all the .docx and .pdf documents you want to search over into this folder. (If these live in other folders, either pull them out, or add '/[folder_name]' to the file path in the code)
 
-# Part 2: Install stuff in Terminal
-1) Open Terminal
-2) Copy and paste this in: `pip3 install pymupdf python-docx tf-keras`
-3) Then, copy and paste this in: `pip3 install -U sentence-transformers`
-4) Finally, copy and paste this: `pip3 install -U qdrant-client`
+# Part 2: Installations
+1) Download Ollama here: https://ollama.com/download
+2) Open Terminal
+3) Copy and paste this in: `pip3 install -U sentence-transformers qdrant-client pymupdf python-docx tf-keras ollama`
 
 # Part 3: You're ready!!
 1) Download the qdrant_basic.py file.
