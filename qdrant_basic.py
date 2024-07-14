@@ -34,24 +34,21 @@ def extract_csv_content(csv_path):
     content_dict = {}
     with open(csv_path, mode='r', newline='', encoding='utf-8') as file:
         reader = csv.reader(file)
-        rows = list(reader)
-        for row_index, row in enumerate(rows):
+        for row_index, row in enumerate(reader):
             content_dict[f"Row {row_index + 1}"] = ", ".join(row)
     return content_dict
 
 def extract_contents_from_directory(directory_path):
     labeled_dict = {}
+    file_path = os.path.join(directory_path, filename)
     for filename in os.listdir(directory_path):
         if filename.endswith(".pdf"):
-            file_path = os.path.join(directory_path, filename)
             content_dict = extract_pdf_content(file_path)
             labeled_dict[filename] = content_dict
         elif filename.endswith(".docx"):
-            file_path = os.path.join(directory_path, filename)
             content_dict = extract_docx_content(file_path)
             labeled_dict[filename] = content_dict
         elif filename.endswith(".csv"):
-            file_path = os.path.join(directory_path, filename)
             content_dict = extract_csv_content(file_path)
             labeled_dict[filename] = content_dict
     return labeled_dict
