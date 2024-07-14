@@ -40,17 +40,18 @@ def extract_csv_content(csv_path):
 
 def extract_contents_from_directory(directory_path):
     labeled_dict = {}
-    file_path = os.path.join(directory_path)
-    for filename in os.listdir(directory_path):
-        if filename.endswith(".pdf"):
-            content_dict = extract_pdf_content(file_path)
-            labeled_dict[filename] = content_dict
-        elif filename.endswith(".docx"):
-            content_dict = extract_docx_content(file_path)
-            labeled_dict[filename] = content_dict
-        elif filename.endswith(".csv"):
-            content_dict = extract_csv_content(file_path)
-            labeled_dict[filename] = content_dict
+    for root, dirs, files in os.walk(directory_path):
+        for filename in files:
+            file_path = os.path.join(root, filename)
+            if filename.endswith(".pdf"):
+                content_dict = extract_pdf_content(file_path)
+                labeled_dict[filename] = content_dict
+            elif filename.endswith(".docx"):
+                content_dict = extract_docx_content(file_path)
+                labeled_dict[filename] = content_dict
+            elif filename.endswith(".csv"):
+                content_dict = extract_csv_content(file_path)
+                labeled_dict[filename] = content_dict
     return labeled_dict
 
 # Specifying the directory containing your PDF and Word documents
