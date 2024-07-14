@@ -5,6 +5,7 @@ import os
 from docx import Document
 import ollama
 import csv
+import sys
 
 # Initializing the sentence transformer model
 encoder = SentenceTransformer("all-MiniLM-L6-v2")
