@@ -70,7 +70,8 @@ client.create_collection(
         size=encoder.get_sentence_embedding_dimension(),
         distance=models.Distance.COSINE,
     ),
-    shard_number=2
+    #this is for big files: shard number can be from 2-4, or you can take it out completely
+    shard_number=4
 )
 
 # Prepare and upload points
