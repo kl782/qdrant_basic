@@ -56,6 +56,7 @@ client.create_collection(
         size=encoder.get_sentence_embedding_dimension(),
         distance=models.Distance.COSINE,
     ),
+    shard_number=2
 )
 
 # Prepare and upload points
