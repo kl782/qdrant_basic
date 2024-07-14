@@ -78,23 +78,28 @@ client.upload_points(
 )
 
 # User input and search
-your_query_here = input("What are you looking for? ")
-hits = client.search(
-    collection_name="local_files",
-    query_vector=encoder.encode(your_query_here).tolist(),
+
+while True:
+    your_query_here = input("What are you looking for? (Press + Enter X or close window to end)")
+    if your_query_here == "X":
+        break
+    else:
+        hits = client.search(
+            collection_name="local_files",
+            query_vector=encoder.encode(your_query_here).tolist(),
     #EDIT THE NUMBER BELOW TO INCREASE THE NUMBER OF SEARCH RESULTS:
-    limit=1
-)
+            limit=1
+    )
 
 
 # Display search results
-for hit in hits:
+        for hit in hits:
     
-    print(f"What you're looking for can be found in {hit.payload['doc']}, on {hit.payload['page']}.")
-    summary = ollama.chat(model='llama3', messages=[
-    {
-        'role':'user',
-        'content':f'In one sentence, summarize the CONTENT of the following vector search result in relation to the original query, {your_query_here}. ##SEARCH RESULT:## {hit.payload['text']} ',
-        },
-    ])
-    print(f"Here's a summary of the source: {summary['message']['content']}")  
+            print(f"What you're looking for can be found in {hit.payload['doc']}, on {hit.payload['page']}.")
+            summary = ollama.chat(model='llama3', messages=[
+            {
+                'role':'user',
+                'content':f'In one sentence, summarize the CONTENT of the following vector search result in relation to the original query, {your_query_here}. ##SEARCH RESULT:## {hit.payload['text']} ',
+                },
+            ])
+            print(f"Here's a summary of the source: {summary['message']['content']}")  
