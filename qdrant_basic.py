@@ -4,6 +4,7 @@ import fitz  # PyMuPDF
 import os
 from docx import Document
 import ollama
+import csv
 
 # Initializing the sentence transformer model
 encoder = SentenceTransformer("all-MiniLM-L6-v2")
@@ -27,6 +28,15 @@ def extract_docx_content(docx_path):
     content_dict["Page 1"] = "\n".join(full_text)
     return content_dict
 
+def extract_csv_content(csv_path):
+    content_dict = {}
+    with open(csv_path, mode='r', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        rows = list(reader)
+        for row_index, row in enumerate(rows):
+            content_dict[f"Row {row_index + 1}"] = ", ".join(row)
+    return content_dict
+
 def extract_contents_from_directory(directory_path):
     labeled_dict = {}
     for filename in os.listdir(directory_path):
@@ -37,6 +47,10 @@ def extract_contents_from_directory(directory_path):
         elif filename.endswith(".docx"):
             file_path = os.path.join(directory_path, filename)
             content_dict = extract_docx_content(file_path)
+            labeled_dict[filename] = content_dict
+        elif filename.endswith(".csv"):
+            file_path = os.path.join(directory_path, filename)
+            content_dict = extract_csv_content(file_path)
             labeled_dict[filename] = content_dict
     return labeled_dict
 
@@ -80,7 +94,7 @@ client.upload_points(
 # User input and search
 
 while True:
-    your_query_here = input("What are you looking for? (Press + Enter X or close window to end)")
+    your_query_here = input("What are you looking for? (Press + Enter X or close window to end) ")
     if your_query_here == "X":
         break
     else:
