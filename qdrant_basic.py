@@ -29,6 +29,7 @@ def extract_docx_content(docx_path):
     return content_dict
 
 def extract_csv_content(csv_path):
+    csv.field_size_limit(sys.maxsize)
     content_dict = {}
     with open(csv_path, mode='r', newline='', encoding='utf-8') as file:
         reader = csv.reader(file)
