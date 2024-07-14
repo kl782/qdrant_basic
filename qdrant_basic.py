@@ -40,7 +40,7 @@ def extract_csv_content(csv_path):
 
 def extract_contents_from_directory(directory_path):
     labeled_dict = {}
-    file_path = os.path.join(directory_path, filename)
+    file_path = os.path.join(directory_path)
     for filename in os.listdir(directory_path):
         if filename.endswith(".pdf"):
             content_dict = extract_pdf_content(file_path)
